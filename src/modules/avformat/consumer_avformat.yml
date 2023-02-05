@@ -115,6 +115,9 @@ parameters:
       - 240 # SMPTE 240M
       - 601 # ITU-R BT.601
       - 709 # ITU-R BT.709
+      - 2020 # ITU-R BT.2020 NCL
+      - 2021 # ITU-R BT.2020 CL
+      - 2085 # SMPTE 2085
 
   - identifier: frame_rate_num
     title: Frame rate numerator

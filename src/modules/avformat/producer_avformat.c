@@ -2361,6 +2361,15 @@ static int video_codec_init( producer_avformat self, int index, mlt_properties p
 			case AVCOL_SPC_BT709:
 				self->yuv_colorspace = 709;
 				break;
+			case AVCOL_SPC_BT2020_CL:
+				self->yuv_colorspace = 2021;
+				break;
+			case AVCOL_SPC_BT2020_NCL:
+				self->yuv_colorspace = 2020;
+				break;
+			case AVCOL_SPC_SMPTE2085:
+				self->yuv_colorspace = 2085;
+				break;
 			default:
 				// This is a heuristic Charles Poynton suggests in "Digital Video and HDTV"
 				self->yuv_colorspace = self->video_codec->width * self->video_codec->height > 750000 ? 709 : 601;
@@ -2385,6 +2394,9 @@ static int video_codec_init( producer_avformat self, int index, mlt_properties p
 		case AVCOL_PRI_SMPTE170M:
 		case AVCOL_PRI_SMPTE240M:
 			self->color_primaries = 601525;
+			break;
+		case AVCOL_PRI_BT2020:
+			self->color_primaries = 2020;
 			break;
 		case AVCOL_PRI_BT709:
 		case AVCOL_PRI_UNSPECIFIED:

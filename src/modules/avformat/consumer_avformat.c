@@ -299,6 +299,9 @@ static void color_trc_from_colorspace( mlt_properties properties )
 	// Default color transfer characteristic from colorspace.
 	switch ( mlt_properties_get_int( properties, "colorspace" ) )
 	{
+	case 2020:
+		mlt_properties_set_int( properties, "color_trc", AVCOL_TRC_SMPTE2084 );
+		break;
 	case 709:
 		mlt_properties_set_int( properties, "color_trc", AVCOL_TRC_BT709 );
 		break;
@@ -326,6 +329,9 @@ static void color_primaries_from_colorspace( mlt_properties properties )
 	switch ( mlt_properties_get_int( properties, "colorspace" ) )
 	{
 	case 0: // sRGB
+	case 2020:
+		mlt_properties_set_int( properties, "color_primaries", AVCOL_PRI_BT2020 );
+		break;
 	case 709:
 		mlt_properties_set_int( properties, "color_primaries", AVCOL_PRI_BT709 );
 		break;
@@ -926,6 +932,15 @@ static AVStream *add_video_stream( mlt_consumer consumer, AVFormatContext *oc, c
 			break;
 		case 709:
 			c->colorspace = AVCOL_SPC_BT709;
+			break;
+		case 2020:
+			c->colorspace = AVCOL_SPC_BT2020_NCL;
+			break;
+		case 2021:
+			c->colorspace = AVCOL_SPC_BT2020_CL;
+			break;
+		case 2085:
+			c->colorspace = AVCOL_SPC_SMPTE2085;
 			break;
 		}
 
